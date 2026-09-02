@@ -61,25 +61,25 @@ Deixei uma explicação mais completa em [docs/architecture.md](docs/architectur
 
 ## Alguns números do projeto
 
-Os números abaixo pertencem ao baseline interno da versão 1.0.25.
+Os números abaixo pertencem ao baseline interno da versão 1.0.27.
 
 | Item | Resultado |
 |---|---:|
-| Arquivos TypeScript e TSX | 209 |
-| Linhas TypeScript e TSX sem testes | cerca de 26,8 mil |
-| Server Actions exportadas | 61 |
+| Arquivos TypeScript e TSX | 236 |
+| Linhas TypeScript e TSX sem testes | cerca de 21,8 mil |
+| Server Actions exportadas | 67 |
 | Telas no App Router | 16 |
-| Testes Vitest | 472 em 57 arquivos |
+| Testes Vitest | 562 em 74 arquivos |
 | Cenários Playwright | 19 |
 | Rotas autenticadas no smoke do Electron | 12 |
 | Configurações da matriz visual | 5 |
-| Migrations aplicadas | 14 |
+| Migrations aplicadas | 22 |
 | Vulnerabilidades conhecidas no `npm audit` | 0 |
 | Commits verificados no QA com Gitleaks | 223 |
 
 ## Telas
 
-Capturei as telas abaixo no aplicativo desktop da versão 1.0.25. Os estados vazios e os dados demonstrativos evitam expor informações da loja.
+Capturei as telas abaixo na versão 1.0.27. Os estados vazios evitam expor informações da loja.
 
 | Dashboard | PDV com caixa fechado |
 |---|---|
@@ -128,7 +128,9 @@ A pasta [screenshots](screenshots/) também contém a validação em escala de 1
 
 ## Testes
 
-Na versão 1.0.25, o projeto passou por lint, TypeScript, build, testes unitários, testes de componentes e cenários no Playwright. Também testei as rotas autenticadas dentro do Electron e conferi a interface em resoluções, escalas e temas diferentes.
+Na versão 1.0.27, o projeto passou por lint, TypeScript, build, testes unitários, testes de componentes e cenários no Playwright. Também testei as rotas autenticadas dentro do Electron e conferi a interface em resoluções, escalas e temas diferentes.
+
+Nesta versão levei a verificação além dos testes automatizados. Exercitei venda, cancelamento, fiado, troca, inventário e permissões contra o banco real, sempre dentro de transação revertida, e percorri cadastro de cliente, abertura e fechamento de caixa e importação de NF-e pela interface, com navegador de verdade. Dois defeitos apareceram aí e não teriam aparecido de outra forma: o modal de fechamento de venda não cabia na altura de um notebook de 15 polegadas, e o campo de saldo do caixa acrescentava ao valor existente em vez de substituí-lo, o que impedia abrir o caixa sem dizer por quê.
 
 O resumo está em [docs/quality.md](docs/quality.md). Os detalhes operacionais e as evidências completas continuam no repositório privado.
 
