@@ -1,6 +1,8 @@
+**English** | [Português](README.pt-BR.md)
+
 # StockFlow
 
-![Logotipo do StockFlow](assets/stockflow-logo.png)
+![StockFlow logo](assets/stockflow-logo.png)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)
@@ -8,45 +10,45 @@
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL%2017-3ECF8E?logo=supabase&logoColor=white)
 ![Electron](https://img.shields.io/badge/Electron-43-47848F?logo=electron&logoColor=white)
 
-O StockFlow é um sistema desktop que desenvolvi para organizar a operação de uma pequena loja. Ele reúne frente de caixa, produtos, estoque, clientes, fiado, trocas, inventário e entrada de NF-e no mesmo aplicativo Windows.
+StockFlow is a desktop system I built to run the day-to-day operation of a small retail store. It brings point of sale, products, inventory, customers, store credit, exchanges, stock counts and NF-e (Brazilian electronic invoice) intake into a single Windows app.
 
-Este repositório serve apenas para apresentar o projeto no meu portfólio. O código-fonte, o instalador, as configurações do banco e os dados da loja ficam em um repositório privado. As imagens desta página usam campos vazios ou textos de exemplo.
+This repository exists only to present the project in my portfolio. The source code, installer, database configuration and store data live in a private repository. The images on this page use empty fields or sample text.
 
-## O que o sistema faz
+## What the system does
 
-- abre e fecha o caixa de cada dia;
-- registra vendas com mais de uma forma de pagamento, desconto e troco;
-- controla produtos vendidos por unidade ou de forma fracionada;
-- importa produtos e custos a partir de XML de NF-e;
-- calcula margem de lucro e permite alterar a meta em lote;
-- registra clientes, compras, fiado e pagamentos;
-- acompanha trocas, devoluções, inventário e movimentações de estoque;
-- separa o acesso do administrador e do operador de caixa;
-- gera instalador e versão portátil para Windows.
+- opens and closes the cash register each day;
+- records sales with multiple payment methods, discounts and change;
+- handles products sold by unit or by fraction;
+- imports products and costs from NF-e XML files;
+- calculates profit margins and lets you change the target margin in bulk;
+- registers customers, purchases, store credit and payments;
+- tracks exchanges, returns, stock counts and inventory movements;
+- separates admin and cashier access;
+- builds an installer and a portable version for Windows.
 
-## Tecnologias que usei
+## Tech stack
 
-| Parte | Tecnologia |
+| Area | Technology |
 |---|---|
-| Aplicativo desktop | Electron 43 |
-| Interface | Next.js 16, React 19 e TypeScript 5 |
-| Banco e autenticação | Supabase e PostgreSQL 17 |
-| Validação | Zod |
-| Estado local | Zustand |
-| Animações | Framer Motion |
-| Gráficos | Recharts |
-| Testes | Vitest, Testing Library e Playwright |
-| Empacotamento | electron-builder |
+| Desktop app | Electron 43 |
+| Interface | Next.js 16, React 19 and TypeScript 5 |
+| Database and auth | Supabase and PostgreSQL 17 |
+| Validation | Zod |
+| Local state | Zustand |
+| Animations | Framer Motion |
+| Charts | Recharts |
+| Tests | Vitest, Testing Library and Playwright |
+| Packaging | electron-builder |
 
-## Como organizei a arquitetura
+## Architecture
 
 ```mermaid
 flowchart LR
-    U[Usuário no Windows] --> E[Aplicativo Electron]
-    E --> N[Interface Next.js]
-    N --> A[Autenticação]
-    N --> D[Banco PostgreSQL]
-    N --> S[Armazenamento de arquivos]
+    U[Windows user] --> E[Electron app]
+    E --> N[Next.js interface]
+    N --> A[Authentication]
+    N --> D[PostgreSQL database]
+    N --> S[File storage]
 
     subgraph Supabase
         A
@@ -55,95 +57,95 @@ flowchart LR
     end
 ```
 
-O Electron abre a aplicação em uma janela desktop, enquanto o Next.js monta as telas e trata as ações do usuário. O Supabase fica responsável pelas contas, permissões e dados. As operações que alteram venda ou estoque são concluídas em transações para evitar registros pela metade.
+Electron opens the application in a desktop window, while Next.js renders the screens and handles user actions. Supabase is responsible for accounts, permissions and data. Operations that change sales or inventory run inside transactions to avoid half-written records.
 
-Deixei uma explicação mais completa em [docs/architecture.md](docs/architecture.md) e outros desenhos em [docs/diagrams.md](docs/diagrams.md).
+A longer explanation is in [docs/architecture.md](docs/architecture.md) and more diagrams are in [docs/diagrams.md](docs/diagrams.md) (both in Portuguese).
 
-## Alguns números do projeto
+## Project numbers
 
-Os números abaixo pertencem ao baseline interno da versão 1.0.27.
+The numbers below come from the internal baseline of version 1.0.27.
 
-| Item | Resultado |
+| Item | Result |
 |---|---:|
-| Arquivos TypeScript e TSX | 236 |
-| Linhas TypeScript e TSX sem testes | cerca de 21,8 mil |
-| Server Actions exportadas | 67 |
-| Telas no App Router | 16 |
-| Testes Vitest | 562 em 74 arquivos |
-| Cenários Playwright | 19 |
-| Rotas autenticadas no smoke do Electron | 12 |
-| Configurações da matriz visual | 5 |
-| Migrations aplicadas | 22 |
-| Vulnerabilidades conhecidas no `npm audit` | 0 |
-| Commits verificados no QA com Gitleaks | 223 |
+| TypeScript and TSX files | 236 |
+| TypeScript and TSX lines, excluding tests | about 21.8k |
+| Exported Server Actions | 67 |
+| App Router screens | 16 |
+| Vitest tests | 562 across 74 files |
+| Playwright scenarios | 19 |
+| Authenticated routes in the Electron smoke test | 12 |
+| Visual matrix configurations | 5 |
+| Applied migrations | 22 |
+| Known vulnerabilities in `npm audit` | 0 |
+| Commits scanned with Gitleaks during QA | 223 |
 
-## Telas
+## Screens
 
-Capturei as telas abaixo na versão 1.0.27. Os estados vazios evitam expor informações da loja.
+These screenshots were taken on version 1.0.27. Empty states avoid exposing store information.
 
-| Dashboard | PDV com caixa fechado |
+| Dashboard | POS with register closed |
 |---|---|
-| ![Dashboard do StockFlow](screenshots/dashboard.png) | ![PDV com caixa fechado](screenshots/pdv-caixa-fechado.png) |
+| ![StockFlow dashboard](screenshots/dashboard.png) | ![POS with register closed](screenshots/pdv-caixa-fechado.png) |
 
-| Catálogo | Precificação e margens |
+| Catalog | Pricing and margins |
 |---|---|
-| ![Catálogo de produtos](screenshots/catalogo.png) | ![Tela de precificação](screenshots/precificacao.png) |
+| ![Product catalog](screenshots/catalogo.png) | ![Pricing screen](screenshots/precificacao.png) |
 
-| Entrada por NF-e | Inventário e movimentações |
+| NF-e intake | Stock count and movements |
 |---|---|
-| ![Importação de NF-e](screenshots/entradas-nfe.png) | ![Balanço e inventário](screenshots/inventario.png) |
+| ![NF-e import](screenshots/entradas-nfe.png) | ![Stock count and inventory](screenshots/inventario.png) |
 
-| Clientes | Fiados |
+| Customers | Store credit |
 |---|---|
-| ![Gestão de clientes](screenshots/clientes.png) | ![Gestão de fiados](screenshots/fiados.png) |
+| ![Customer management](screenshots/clientes.png) | ![Store credit management](screenshots/fiados.png) |
 
-| Histórico de vendas | Trocas e devoluções |
+| Sales history | Exchanges and returns |
 |---|---|
-| ![Histórico de vendas](screenshots/historico-vendas.png) | ![Trocas e devoluções](screenshots/trocas.png) |
+| ![Sales history](screenshots/historico-vendas.png) | ![Exchanges and returns](screenshots/trocas.png) |
 
-| Perfil | Configurações da loja |
+| Profile | Store settings |
 |---|---|
-| ![Perfil do usuário](screenshots/perfil.png) | ![Configurações da loja](screenshots/configuracoes.png) |
+| ![User profile](screenshots/perfil.png) | ![Store settings](screenshots/configuracoes.png) |
 
-### Componente em temas e tamanhos diferentes
+### One component across themes and sizes
 
-| Tema escuro | Tema claro |
+| Dark theme | Light theme |
 |---|---|
-| ![Modal de cliente no tema escuro](screenshots/modal-cliente-escuro.png) | ![Modal de cliente no tema claro](screenshots/modal-cliente-claro.png) |
+| ![Customer modal, dark theme](screenshots/modal-cliente-escuro.png) | ![Customer modal, light theme](screenshots/modal-cliente-claro.png) |
 
-| Janela compacta | Tela ampla |
+| Compact window | Wide screen |
 |---|---|
-| ![Modal em janela compacta](screenshots/modal-cliente-compacto.png) | ![Modal em tela ampla](screenshots/modal-cliente-tela-ampla.png) |
+| ![Modal in a compact window](screenshots/modal-cliente-compacto.png) | ![Modal on a wide screen](screenshots/modal-cliente-tela-ampla.png) |
 
-A pasta [screenshots](screenshots/) também contém a validação em escala de 150% e a folha de identidade visual.
+The [screenshots](screenshots/) folder also includes the 150% scale check and the visual identity sheet.
 
-## Decisões que tomei durante o projeto
+## Decisions I made
 
-- Mantive preço, estoque e pagamentos validados no banco, sem depender apenas da interface.
-- Usei transações para as operações que alteram vários registros.
-- Criei componentes compartilhados para botões, formulários, alertas e modais.
-- Adicionei tema claro e escuro, navegação por teclado, controle de foco e movimento reduzido.
-- Separei as permissões por papel e mantive as verificações no servidor e no banco.
-- Empacotei o Next.js junto com o Electron para entregar uma experiência de aplicativo Windows.
+- Price, stock and payments are validated in the database, not only in the interface.
+- Operations that change several records run inside transactions.
+- Shared components for buttons, forms, alerts and modals.
+- Light and dark themes, keyboard navigation, focus management and reduced motion.
+- Role-based permissions, with checks on the server and in the database.
+- Next.js packaged together with Electron to deliver a native-feeling Windows app.
 
-## Testes
+## Testing
 
-Na versão 1.0.27, o projeto passou por lint, TypeScript, build, testes unitários, testes de componentes e cenários no Playwright. Também testei as rotas autenticadas dentro do Electron e conferi a interface em resoluções, escalas e temas diferentes.
+On version 1.0.27 the project went through lint, TypeScript, build, unit tests, component tests and Playwright scenarios. Authenticated routes were also tested inside Electron, and the interface was checked across resolutions, scales and themes.
 
-Nesta versão levei a verificação além dos testes automatizados. Exercitei venda, cancelamento, fiado, troca, inventário e permissões contra o banco real, sempre dentro de transação revertida, e percorri cadastro de cliente, abertura e fechamento de caixa e importação de NF-e pela interface, com navegador de verdade. Dois defeitos apareceram aí e não teriam aparecido de outra forma: o modal de fechamento de venda não cabia na altura de um notebook de 15 polegadas, e o campo de saldo do caixa acrescentava ao valor existente em vez de substituí-lo, o que impedia abrir o caixa sem dizer por quê.
+This version went beyond automated tests. Sales, cancellations, store credit, exchanges, stock counts and permissions were exercised against the real database, always inside a rolled-back transaction, and customer registration, opening and closing the register and NF-e import were walked through in the interface with a real browser. Two bugs showed up that would not have appeared otherwise: the checkout modal did not fit the height of a 15-inch laptop screen, and the register balance field appended to the existing value instead of replacing it, which blocked opening the register without saying why.
 
-O resumo está em [docs/quality.md](docs/quality.md). Os detalhes operacionais e as evidências completas continuam no repositório privado.
+The summary is in [docs/quality.md](docs/quality.md). Operational details and full evidence stay in the private repository.
 
-## Documentação
+## Documentation (in Portuguese)
 
-- [Arquitetura](docs/architecture.md)
-- [Diagramas](docs/diagrams.md)
-- [Interface e design system](docs/design-system.md)
-- [Qualidade e testes](docs/quality.md)
-- [Decisão de segurança](docs/security.md)
+- [Architecture](docs/architecture.md)
+- [Diagrams](docs/diagrams.md)
+- [Interface and design system](docs/design-system.md)
+- [Quality and testing](docs/quality.md)
+- [Security decision](docs/security.md)
 
-## Sobre este repositório
+## About this repository
 
-Não há código executável, credenciais, migrations, instaladores ou dados reais aqui. O material foi separado para mostrar o processo e as decisões técnicas sem expor a operação da loja.
+There is no executable code, credentials, migrations, installers or real data here. The material was separated to show the process and technical decisions without exposing the store's operation.
 
-O projeto é proprietário. As imagens, a marca e a documentação não possuem licença de reutilização.
+The project is proprietary. The images, brand and documentation are not licensed for reuse.
